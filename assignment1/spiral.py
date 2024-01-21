@@ -1,7 +1,7 @@
 """
     File: spiral.py
-    Description: A program that generates a spiral matrix beginning at the center and traveling 
-                right, left, down, and up while incrementing the previous value 
+    Description: A program that generates a spiral matrix beginning at the center and traveling
+                right, left, down, and up while incrementing the previous value
                 in the spiral by one. The sum_sub_grid function sums adjacent numbers given a
                 value in the matrix spiral. If the value does not exist, then a 0 is returned.
     Student Name: Preston Cook
@@ -31,11 +31,11 @@ def create_spiral(dim):
     matrix[y_val][x_val] = 1
     cur = matrix[y_val][x_val]
     slots -= 1
-    dir = 0
+    direction = 0
 
     while cur < slots:
 
-        idx = dir % 4
+        idx = direction % 4
         cur = matrix[y_val][x_val]
         prev_y, prev_x = y_val, x_val
         mult = multipliers[idx]
@@ -71,7 +71,7 @@ def create_spiral(dim):
                 matrix[y_val][x_val] = cur
 
         multipliers[idx] += 2
-        dir += 1
+        direction += 1
 
     return matrix
 
