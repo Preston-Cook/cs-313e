@@ -1,8 +1,9 @@
 """
     File: spiral.py
-    Description: A program that generates a spiral matrix beginning at the center and traveling right, 
-                left, down, and up while incrementing the previous value in the spiral by one. 
-                The sum_sub_grid function sums adjacent numbers given a value in the matrix spiral. If the value does not exist, then a 0 is returned
+    Description: A program that generates a spiral matrix beginning at the center and traveling 
+                right, left, down, and up while incrementing the previous value 
+                in the spiral by one. The sum_sub_grid function sums adjacent numbers given a
+                value in the matrix spiral. If the value does not exist, then a 0 is returned.
     Student Name: Preston Cook
     Student UT EID: plc886
     Partner Name: Crystal Hicks
@@ -15,6 +16,8 @@
     Output: returns a 2-D list representing a spiral
     if n is even add one to n
 """
+
+
 def create_spiral(dim):
     """Creates a Spiral given a dimension for the spiral diameter"""
 
@@ -41,27 +44,27 @@ def create_spiral(dim):
             # right
 
             # prevent spillover in final pass
-            while x_val < mult + prev_x and x_val != dim - 1: 
+            while x_val < mult + prev_x and x_val != dim - 1:
                 cur += 1
                 x_val += 1
                 matrix[y_val][x_val] = cur
-                    
+
         elif idx == 1:
             # down
             while y_val < mult + prev_y:
                 cur += 1
                 y_val += 1
                 matrix[y_val][x_val] = cur
-                    
+
         elif idx == 2:
             # left
             while x_val > prev_x - mult:
                 cur += 1
                 x_val -= 1
                 matrix[y_val][x_val] = cur
-                    
+
         elif idx == 3:
-            # up 
+            # up
             while y_val > prev_y - mult:
                 cur += 1
                 y_val -= 1
@@ -71,6 +74,7 @@ def create_spiral(dim):
         dir += 1
 
     return matrix
+
 
 def sum_sub_grid(grid, val):
     """
@@ -148,6 +152,7 @@ def main():
             print(adj_sum)
         except EOFError:
             break
+
 
 if __name__ == "__main__":
     main()
