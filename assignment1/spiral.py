@@ -1,7 +1,7 @@
 """
     File: spiral.py
     Description: A program that generates a spiral matrix beginning at the center and traveling right, left, down, and up while incrementing the previous value in the spiral by one. 
-                 The sum_sub_grid function sums adjacent numbers given a value in the matrix spiral. If the value does not exist
+                 The sum_sub_grid function sums adjacent numbers given a value in the matrix spiral. If the value does not exist, then a 0 is returned
     Student Name: Preston Cook
     Student UT EID: plc886
     Partner Name: Crystal Hicks
