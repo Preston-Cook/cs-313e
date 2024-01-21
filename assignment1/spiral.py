@@ -36,34 +36,33 @@ def create_spiral(dim):
         prev_y, prev_x = y, x
         mult = multipliers[idx]
 
-        match idx:
-            case 0:
-                # right
-                while x < mult + prev_x and x != dim - 1: # prevent spillover in final pass
-                    cur += 1
-                    x += 1
-                    matrix[y][x] = cur
+        if idx == 0:
+            # right
+            while x < mult + prev_x and x != dim - 1: # prevent spillover in final pass
+                cur += 1
+                x += 1
+                matrix[y][x] = cur
                     
-            case 1:
-                # down
-                while y < mult + prev_y:
-                    cur += 1
-                    y += 1
-                    matrix[y][x] = cur
+        elif idx == 1:
+            # down
+            while y < mult + prev_y:
+                cur += 1
+                y += 1
+                matrix[y][x] = cur
                     
-            case 2:
-                # left
-                while x > prev_x - mult:
-                    cur += 1
-                    x -= 1
-                    matrix[y][x] = cur
+        elif idx == 2:
+            # left
+            while x > prev_x - mult:
+                cur += 1
+                x -= 1
+                matrix[y][x] = cur
                     
-            case 3:
-                # up 
-                while y > prev_y - mult:
-                    cur += 1
-                    y -= 1
-                    matrix[y][x] = cur
+        elif idx == 3:
+            # up 
+            while y > prev_y - mult:
+                cur += 1
+                y -= 1
+                matrix[y][x] = cur
 
         multipliers[idx] += 2
         dir += 1
