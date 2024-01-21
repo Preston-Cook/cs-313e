@@ -23,17 +23,17 @@ def create_spiral(dim):
     slots = dim ** 2
     multipliers = [1, 1, 2, 2]
 
-    x = y = dim // 2
-    matrix[y][x] = 1
-    cur = matrix[y][x]
+    x_val = y_val = dim // 2
+    matrix[y_val][x_val] = 1
+    cur = matrix[y_val][x_val]
     slots -= 1
     dir = 0
 
     while cur < slots:
 
         idx = dir % 4
-        cur = matrix[y][x]
-        prev_y, prev_x = y, x
+        cur = matrix[y_val][x_val]
+        prev_y, prev_x = y_val, x_val
         mult = multipliers[idx]
 
         if idx == 0:
@@ -41,28 +41,28 @@ def create_spiral(dim):
             while x < mult + prev_x and x != dim - 1: # prevent spillover in final pass
                 cur += 1
                 x += 1
-                matrix[y][x] = cur
+                matrix[y_val][x_val] = cur
                     
         elif idx == 1:
             # down
             while y < mult + prev_y:
                 cur += 1
                 y += 1
-                matrix[y][x] = cur
+                matrix[y_val][x_val] = cur
                     
         elif idx == 2:
             # left
             while x > prev_x - mult:
                 cur += 1
                 x -= 1
-                matrix[y][x] = cur
+                matrix[y_val][x_val] = cur
                     
         elif idx == 3:
             # up 
             while y > prev_y - mult:
                 cur += 1
                 y -= 1
-                matrix[y][x] = cur
+                matrix[y_val][x_val] = cur
 
         multipliers[idx] += 2
         dir += 1
@@ -81,42 +81,42 @@ def sum_sub_grid(grid, val):
     """
     n = len(grid)
 
-    for r in range(n):
-        for c in range(n):
-            if grid[r][c] == val:
+    for row in range(n):
+        for col in range(n):
+            if grid[row][col] == val:
                 total = 0
 
                 # top-left
-                if r - 1 >= 0 and c - 1 >= 0:
-                    total += grid[r - 1][c - 1]
+                if row - 1 >= 0 and col - 1 >= 0:
+                    total += grid[row - 1][col - 1]
 
                 # top-mid
-                if r - 1 >= 0:
-                    total += grid[r - 1][c]
+                if row - 1 >= 0:
+                    total += grid[row - 1][col]
 
                 # top-right
-                if r - 1 >= 0 and c + 1 < n:
-                    total += grid[r - 1][c + 1]
+                if row - 1 >= 0 and col + 1 < n:
+                    total += grid[row - 1][col + 1]
 
                 # mid-left
-                if c - 1 >= 0:
-                    total += grid[r][c - 1]
+                if col - 1 >= 0:
+                    total += grid[row][col - 1]
 
                 # mid-right
-                if c + 1 < n:
-                    total += grid[r][c + 1]
+                if col + 1 < n:
+                    total += grid[row][col + 1]
 
                 # bottom-left
-                if r + 1 < n and c - 1 >= 0:
-                    total += grid[r + 1][c - 1]
+                if row + 1 < n and col - 1 >= 0:
+                    total += grid[row + 1][col - 1]
 
                 # bottom-mid
-                if r + 1 < n:
-                    total += grid[r + 1][c]
+                if row + 1 < n:
+                    total += grid[row + 1][col]
 
                 # bottom-right
-                if r + 1 < n and c + 1 < n:
-                    total += grid[r + 1][c + 1]
+                if row + 1 < n and col + 1 < n:
+                    total += grid[row + 1][col + 1]
 
                 return total
 
