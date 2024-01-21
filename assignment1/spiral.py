@@ -144,7 +144,7 @@ def main():
         # print the sum
             print(adj_sum)
         except EOFError:
-         break
+            break
 
 if __name__ == "__main__":
     main()
