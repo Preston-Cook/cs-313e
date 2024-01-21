@@ -16,9 +16,10 @@
     Output: returns a 2-D list representing a spiral
     if n is even add one to n
 """
+from typing import List
 
 
-def create_spiral(dim):
+def create_spiral(dim: int) -> List[List[int]]:
     """Creates a Spiral given a dimension for the spiral diameter"""
 
     # initialize matrix
@@ -76,7 +77,7 @@ def create_spiral(dim):
     return matrix
 
 
-def sum_sub_grid(grid, val):
+def sum_sub_grid(grid: List[List[int]], val: int) -> int:
     """
     Input: grid a 2-D list containing a spiral of numbers
     val is a number within the range of numbers in
@@ -131,7 +132,7 @@ def sum_sub_grid(grid, val):
     return 0
 
 
-def main():
+def main() -> None:
     """
     A Main Function to read the data from input,
     run the program and print to the standard output.
