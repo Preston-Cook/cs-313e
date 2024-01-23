@@ -147,10 +147,13 @@ def main() -> None:
     while True:
         try:
             sum_val = int(input())
-        # find sum of adjacent terms
+
+            # find sum of adjacent terms
             adj_sum = sum_sub_grid(mat, sum_val)
-        # print the sum
+
+            # print the sum
             print(adj_sum)
+
         except EOFError:
             break
 
