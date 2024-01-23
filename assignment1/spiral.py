@@ -139,9 +139,11 @@ def main() -> None:
     """
     # read the dimension of the grid and value from input file
     dim = int(input())
+
     # test that dimension is odd
     if dim % 2 == 0:
         dim += 1
+
     # create a 2-D list representing the spiral
     mat = create_spiral(dim)
     while True:
