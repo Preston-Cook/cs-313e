@@ -1,11 +1,30 @@
+"""
+    File: employee.py
+    Description: Defines an employee class and other subclasses
+                as part of an exercise in inheritance, 
+                polymorphism, abstraction, and encapsulation.
+    Student Name: Preston Cook
+    Student UT EID: plc886
+    Partner Name: Crystal Hicks
+    Partner UT EID: crh4624
+    Course Name: CS 313E
+    Unique Number: 50775
+    Date Created: 30 January 2023
+    Date Last Modified: 30 January 2023
+"""
 
 
 class Employee:
+    """The base employee class with name, identifier, and salary attributes"""
 
     def __init__(self, **kwargs):
         self.name = kwargs.get('name')
         self.identifier = kwargs.get('identifier')
         self.salary = kwargs.get('salary')
+
+    def cal_salary(self):
+        """Returns the salary for base Employee class"""
+        return self.salary
 
     def __str__(self):
         return f'{self.__class__.__name__}\n{self.name}, {self.identifier}, {self.salary}'
@@ -16,17 +35,28 @@ class Employee:
 ############################################################
 
 class PermanentEmployee(Employee):
+    """ 
+    A permanent employee class that inherits from the base Employee Class
+    with overloaded cal_salary method and new benefits property
+    """
+
     def __init__(self, **kwargs):
         Employee.__init__(self, **kwargs)
         self.benefits = kwargs.get('benefits')
 
     def cal_salary(self):
+        """
+        Calculates the salary for an instance of PermanentEmployee depending on
+        the benefits property
+        """
         if 'health_insurance' in self.benefits and 'retirement' in self.benefits:
-            return f'{self.salary * 0.7}'
-        elif 'health_insurance' in self.benefits:
-            return f'{self.salary * 0.9}'
-        elif 'retirement' in self.benefits:
-            return f'{self.salary * 0.8}'
+            return self.salary * 0.7
+        if 'health_insurance' in self.benefits:
+            return self.salary * 0.9
+        if 'retirement' in self.benefits:
+            return self.salary * 0.8
+
+        return 0
 
     def __str__(self):
         return f'{Employee.__str__(self)}, {self.benefits}'
@@ -37,12 +67,20 @@ class PermanentEmployee(Employee):
 
 
 class Manager(Employee):
+    """ 
+    A manager class that inherits from the base Employee Class with 
+    an overloaded cal_salary method and new bonus property
+    """
+
     def __init__(self, **kwargs):
         Employee.__init__(self, **kwargs)
         self.bonus = kwargs.get('bonus')
 
     def cal_salary(self):
-        return f'{self.salary + self.bonus:.1f}'
+        """
+        Calculates the salary for an instance of Manager and adding bonus
+        """
+        return float(self.salary + self.bonus)
 
     def __str__(self):
         return f'{Employee.__str__(self)}, {self.bonus}'
@@ -52,13 +90,21 @@ class Manager(Employee):
 ############################################################
 ############################################################
 class TemporaryEmployee(Employee):
-    def __init__(self, **kwargs):
+    """
+    A temporary employee class that inherits from the base Employee Class
+    with an overloaded cal_salary method and new hours property
+    """
 
+    def __init__(self, **kwargs):
         Employee.__init__(self, **kwargs)
         self.hours = kwargs.get('hours')
 
     def cal_salary(self):
-        return f'{self.salary * self.hours:.1f}'
+        """
+        Calculates the salary for an instance of TemporaryEmployee by 
+        multiplying salary and hours
+        """
+        return float(self.salary * self.hours)
 
     def __str__(self):
         return f'{Employee.__str__(self)}, {self.hours}'
@@ -70,12 +116,21 @@ class TemporaryEmployee(Employee):
 
 
 class Consultant(TemporaryEmployee):
+    """
+    A consultant class that inherits from the Temporary Employee Class
+    with an overloaded cal_salary method and new travel property
+    """
+
     def __init__(self, **kwargs):
         TemporaryEmployee.__init__(self, **kwargs)
         self.travel = kwargs.get('travel')
 
     def cal_salary(self):
-        return f'{float(TemporaryEmployee.cal_salary(self)) + self.travel * 1000:.1f}'
+        """
+        Calculates the salary for an instance of Consultant by 
+        calling cal_salary from the inherited class and adding travel pay
+        """
+        return TemporaryEmployee.cal_salary(self) + self.travel * 1000
 
     def __str__(self):
         return f'{TemporaryEmployee.__str__(self)}, {self.travel}'
@@ -87,15 +142,26 @@ class Consultant(TemporaryEmployee):
 
 
 class ConsultantManager(Consultant, Manager):
+    """
+    A consultant manager class that inherits from both the Consultant and 
+    Manager classes. No new properties are defined, but the cal_salary method
+    is overloaded
+    """
+
     def __init__(self,  **kwargs):
         Consultant.__init__(self, **kwargs)
         Manager.__init__(self, **kwargs)
 
     def cal_salary(self):
-        return f'{float(Consultant.cal_salary(self)) + self.bonus:.1f}'
+        """
+        Calculates the salary of a consultant manager by calling cal_salary
+        on the Consultant class and adding bonus
+        """
+        return Consultant.cal_salary(self) + self.bonus
 
     def __str__(self):
-        return f'{Consultant.__str__(self)}, ConsultantManager\n{" ".join(Manager.__str__(self).split()[1:])}'
+        manage_str = " ".join(Manager.__str__(self).split()[1:])
+        return f'{Consultant.__str__(self)}, ConsultantManager\n{manage_str}'
 
 
 ############################################################
