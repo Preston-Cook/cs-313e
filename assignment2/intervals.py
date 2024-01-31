@@ -1,8 +1,20 @@
 """
+    File: employee.py
+    Description: Given a list of tuples representing intervals,
+                The program returns a list of collapsed intervals
+    Student Name: Preston Cook
+    Student UT EID: plc886
+    Partner Name: Crystal Hicks
+    Partner UT EID: crh4624
+    Course Name: CS 313E
+    Unique Number: 50775
+    Date Created: 30 January 2023
+    Date Last Modified: 30 January 2023
     Input: tuples_list is an unsorted list of tuples denoting intervals
-    Output: a list of merged tuples sorted by the lower number of the
-    interval
+    Output: a list of merged tuples sorted by the lower number of the 
+            interval
 """
+
 import sys
 from typing import List, Tuple
 
