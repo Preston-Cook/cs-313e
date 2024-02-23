@@ -29,7 +29,7 @@ def merge_tuples(tuples_list: List[Tuple]) -> List[Tuple]:
     stack = [tups[0]]
 
     for i in range(1, len(tups)):
-        if stack[-1][0] <= tups[i][0] <= stack[-1][-1]:
+        if stack[-1][0] <= tups[i][0] <= stack[-1][1]:
 
             # pop value from stack
             l, r = stack.pop()
