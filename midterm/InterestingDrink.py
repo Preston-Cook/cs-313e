@@ -21,15 +21,15 @@ import sys
 
 
 def find_purchase_options(prices: list[int], money: list[int]) -> list[int]:
-    prices.sort()
+    sorted_prices = sorted(prices)
     res = []
 
     for m in money:
         count = 0
-        l, r = 0, len(prices) - 1
+        l, r = 0, len(sorted_prices) - 1
         while l <= r:
             mid = l + (r - l) // 2
-            if prices[mid] <= m:
+            if sorted_prices[mid] <= m:
                 count = mid + 1
                 l = mid + 1
             else:

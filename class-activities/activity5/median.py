@@ -1,4 +1,4 @@
-import heapq 
+import heapq
 
 
 def heapsort(list):
@@ -18,6 +18,6 @@ def get_median(m_list):
 
     return median
 
+
 test_list = [4, 5, 8, 9, 10]
 print(get_median(test_list))
-
