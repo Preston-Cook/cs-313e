@@ -30,18 +30,20 @@ ops = {
     '//': operator.floordiv,
     '%': operator.mod,
     '**': operator.pow
-    }
+}
 
 operators = ['+', '-', '*', '/', '//', '%', '**']
 
+
 class Stack ():
     """Standard stack implementation used to create expression tree"""
+
     def __init__(self):
         self.stack = []
 
     def push(self, data):
         """pushes data onto the top of the stack"""
-        self.stack.append (data)
+        self.stack.append(data)
 
     def pop(self):
         """pops and returns the item from the top of the stack"""
@@ -53,20 +55,25 @@ class Stack ():
         """returns true if the stack has no elements"""
         return len(self.stack) == 0
 
+
 class Node ():
     """Each node of the tree has data that is a parenthese, operator, or operand
         and has a left and right child
     """
-    def __init__ (self, data = None, l_child = None, r_child = None):
+
+    def __init__(self, data=None, l_child=None, r_child=None):
         self.data = data
         self.l_child = l_child
         self.r_child = r_child
 
+
 class Tree():
     """Expression tree, can evaluate valid infix expressions"""
-    def __init__ (self):
+
+    def __init__(self):
         self.root = None
-    def create_tree (self, expr):
+
+    def create_tree(self, expr):
         """creates the expression tree from input expr"""
         stack = Stack()
         tokens = expr.split()
@@ -90,7 +97,8 @@ class Tree():
                 current_node = stack.pop()
     # this function should evaluate the tree's expression
     # returns the value of the expression after being calculated
-    def evaluate (self, node):
+
+    def evaluate(self, node):
         """returns the value of the expression after being calculated"""
         if node is None:
             return 0
@@ -102,19 +110,21 @@ class Tree():
 
         return ops[node.data](float(left_total), float(right_total))
 
-    def pre_order (self, node):
+    def pre_order(self, node):
         """returns a string of the expression written in preorder notation"""
         if node is None:
             return ""
         return node.data + " " + self.pre_order(node.l_child) + self.pre_order(node.r_child)
 
-    def post_order (self, node):
+    def post_order(self, node):
         """returns a string of the expression written in postorder notation"""
         if node is None:
             return ""
         return self.post_order(node.l_child) + self.post_order(node.r_child) + " " + node.data
 
 # you should NOT need to touch main, everything should be handled for you
+
+
 def main():
     """main method"""
     # read infix expression
@@ -131,6 +141,7 @@ def main():
 
     # get the postfix version of the expression and print
     print("Postfix Expression:", tree.post_order(tree.root).strip())
+
 
 if __name__ == "__main__":
     main()
