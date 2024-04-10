@@ -35,7 +35,7 @@ ops = {
 operators = ['+', '-', '*', '/', '//', '%', '**']
 
 
-class Stack ():
+class Stack(object):
     """Standard stack implementation used to create expression tree"""
 
     def __init__(self):
@@ -56,7 +56,7 @@ class Stack ():
         return len(self.stack) == 0
 
 
-class Node ():
+class Node(object):
     """Each node of the tree has data that is a parenthese, operator, or operand
         and has a left and right child
     """
@@ -67,13 +67,13 @@ class Node ():
         self.r_child = r_child
 
 
-class Tree():
+class Tree(object):
     """Expression tree, can evaluate valid infix expressions"""
 
     def __init__(self):
         self.root = None
 
-    def create_tree(self, expr):
+    def create_tree(self, expr: str):
         """creates the expression tree from input expr"""
         stack = Stack()
         tokens = expr.split()
@@ -98,7 +98,7 @@ class Tree():
     # this function should evaluate the tree's expression
     # returns the value of the expression after being calculated
 
-    def evaluate(self, node):
+    def evaluate(self, node: Node):
         """returns the value of the expression after being calculated"""
         if node is None:
             return 0
@@ -110,13 +110,13 @@ class Tree():
 
         return ops[node.data](float(left_total), float(right_total))
 
-    def pre_order(self, node):
+    def pre_order(self, node: Node) -> str:
         """returns a string of the expression written in preorder notation"""
         if node is None:
             return ""
         return node.data + " " + self.pre_order(node.l_child) + self.pre_order(node.r_child)
 
-    def post_order(self, node):
+    def post_order(self, node: Node) -> str:
         """returns a string of the expression written in postorder notation"""
         if node is None:
             return ""
