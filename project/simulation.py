@@ -158,7 +158,6 @@ class Simulation:
             if recent_history[2] == 0 and recent_history[3] == 0:
                 break
 
-        self.plot_temporal()
         self.generate_video()
 
     def simulate_week(self, week: int) -> tuple[list[PersonNode], int]:
@@ -292,33 +291,6 @@ class Simulation:
         ))
 
         self.matrix_history.append(matrix_copy)
-
-    def plot_temporal(self) -> None:
-        """
-        Plot the temporal evolution of the disease.
-
-        This method generates a plot showing the temporal evolution of the disease 
-        by plotting the number of individuals in different population states (e.g., 
-        alive, healthy, infected, contagious, dead, immune) over time.
-        """
-        weeks = list(range(len(self.history)))
-
-        dependent_vars = list(zip(*self.history))
-
-        labels = ['Alive', 'Healthy', 'Infected',
-                  'Contagious', 'Dead', 'Immune']
-
-        plt.title(f'Temporal Evolution of {self.disease_name}')
-        plt.xlabel('Weeks')
-        plt.ylabel('Number of Population')
-
-        colors = ['blue', 'green', 'yellow', 'orange', 'red', 'black']
-
-        for i in range(len(labels)):
-            plt.plot(weeks, dependent_vars[i],
-                     label=labels[i], color=colors[i])
-        plt.legend()
-        plt.savefig('temporal')
 
     def generate_video(self) -> None:
         """
