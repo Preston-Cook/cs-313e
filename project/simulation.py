@@ -8,6 +8,7 @@ from matplotlib.colors import ListedColormap
 from matplotlib.animation import FuncAnimation
 import random as r
 from tqdm import tqdm
+from collections import deque
 
 
 class Simulation:
@@ -114,6 +115,36 @@ class Simulation:
                     adjacent_nodes.append(self.matrix[i][j])
 
         return adjacent_nodes
+    
+    def breadth_first_search(self, start_node):
+        """
+        Returns a list of perimeter nodes starting from given node in the matrix.
+
+        Args:
+            start_node (PersonNode): node in the matrix to start from
+        
+        Returns:
+            List[PersonNode]: List of perimeter nodes.
+        """
+        queue = deque([start_node])
+        visited = set()
+        perimeter_nodes = []
+
+        while queue:
+            node = queue.popleft()
+            if node not in visited:
+                visited.add(node)
+                adjacent_nodes = self.get_adjacent_nodes(node)
+                for adj in adjacent_nodes:
+                    if adj not in visited:
+                        queue.append(adj)
+
+        for node in visited:
+            adjacent_nodes = self.get_adjacent_nodes(node)
+            if any(adj.status == Status.EMPTY for adj in adjacent_nodes):
+                perimeter_nodes.append(node)
+
+        return perimeter_nodes
 
     def run_simulation(self, disease_name: str, num_weeks: int, num_contagious_initial: int, output_file: str) -> None:
         """
@@ -227,9 +258,10 @@ class Simulation:
         """Finds nodes with adjacent alive nodes and simulates birth"""
         num_births = 0
 
-        r.shuffle(empty_nodes)
+        perimeter_nodes = self.breadth_first_search(self.matrix[0][0])
+        r.shuffle(perimeter_nodes)
 
-        for node in empty_nodes:
+        for node in perimeter_nodes:
             if num_births == num_babies:
                 break
 
@@ -237,6 +269,7 @@ class Simulation:
             if any([adjacent_node.status not in [Status.EMPTY, Status.DEAD] for adjacent_node in adjacent_nodes]):
                 node.simulate_birth()
                 num_births += 1
+            perimeter_nodes.remove(node)
 
     def update_counts(self) -> None:
         """
