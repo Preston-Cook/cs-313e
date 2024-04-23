@@ -262,13 +262,13 @@ class Simulation:
         r.shuffle(perimeter_nodes)
 
         for node in perimeter_nodes:
-            if num_births == num_babies:
-                break
-
             adjacent_nodes = self.get_adjacent_nodes(node)
-            if any([adjacent_node.status not in [Status.EMPTY, Status.DEAD] for adjacent_node in adjacent_nodes]):
-                node.simulate_birth()
-                num_births += 1
+            for adj in adjacent_nodes:
+                if num_births == num_babies:
+                    break
+                if adj.status == Status.EMPTY and node.status not in [Status.EMPTY, Status.DEAD]:
+                    adj.simulate_birth()
+                    num_births += 1
             perimeter_nodes.remove(node)
 
     def update_counts(self) -> None:
