@@ -53,7 +53,7 @@ class PersonNode:
             self.status = Status.INFECTED
             self.week_infected = week
 
-    def simulate_contagion(self, week: int):
+    def simulate_contagion(self, week: int) -> None:
         """
         Simulates the person becoming contagious in the given week.
 
@@ -92,7 +92,7 @@ class PersonNode:
         val = int(arr[0])
         self.age = val
 
-    def simulate_end_contagion(self, week: int, mortality_rate: float):
+    def simulate_end_contagion(self, week: int, mortality_rate: float) -> None:
         """
         Simulates the end of contagion, either through death or immunity.
 
