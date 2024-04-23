@@ -19,7 +19,7 @@ class TestCases(unittest.TestCase):
         AGE_MU = 24
         AGE_SIGMA = 6
         # population growth rate
-        ANNUAL_POP_GROWTH_RATE = 0.49
+        ANNUAL_POP_GROWTH_RATE = 0.05
         # number of initial contagious people
         NUM_CONTAGIOUS_INITAL = 2
         # number of simulation iterations
@@ -52,7 +52,7 @@ class TestCases(unittest.TestCase):
         AGE_MU = 24
         AGE_SIGMA = 6
         # population growth rate
-        ANNUAL_POP_GROWTH_RATE = 0.49
+        ANNUAL_POP_GROWTH_RATE = 0.05
         # number of initial contagious people
         NUM_CONTAGIOUS_INITAL = 5
         # number of simulation iterations
@@ -86,7 +86,7 @@ class TestCases(unittest.TestCase):
         AGE_MU = 24
         AGE_SIGMA = 15
         # population growth rate
-        ANNUAL_POP_GROWTH_RATE = 0.63
+        ANNUAL_POP_GROWTH_RATE = 0.05
         # number of initial contagious people
         NUM_CONTAGIOUS_INITAL = 3
         # number of simulation iterations

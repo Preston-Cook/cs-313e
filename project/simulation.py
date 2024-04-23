@@ -115,14 +115,14 @@ class Simulation:
                     adjacent_nodes.append(self.matrix[i][j])
 
         return adjacent_nodes
-    
+
     def breadth_first_search(self, start_node):
         """
         Returns a list of perimeter nodes starting from given node in the matrix.
 
         Args:
             start_node (PersonNode): node in the matrix to start from
-        
+
         Returns:
             List[PersonNode]: List of perimeter nodes.
         """
@@ -159,7 +159,7 @@ class Simulation:
         self.disease_name = disease_name
         self.output_file = output_file
 
-        for week in tqdm(range(num_weeks)):
+        for week in tqdm(range(num_weeks + 2)):
             if week == 0:
                 num_annual_babies = math.ceil(
                     (self.INITIAL_POP_DIMENSION ** 2) * (self.POP_GROWTH_RATE))
@@ -259,17 +259,23 @@ class Simulation:
         num_births = 0
 
         perimeter_nodes = self.breadth_first_search(self.matrix[0][0])
-        r.shuffle(perimeter_nodes)
+
+        empty_nodes = []
 
         for node in perimeter_nodes:
             adjacent_nodes = self.get_adjacent_nodes(node)
             for adj in adjacent_nodes:
-                if num_births == num_babies:
-                    break
                 if adj.status == Status.EMPTY and node.status not in [Status.EMPTY, Status.DEAD]:
-                    adj.simulate_birth()
-                    num_births += 1
-            perimeter_nodes.remove(node)
+                    empty_nodes.append(adj)
+
+        r.shuffle(empty_nodes)
+
+        for node in empty_nodes:
+            if num_births == num_babies:
+                break
+
+            node.simulate_birth()
+            num_births += 1
 
     def update_counts(self) -> None:
         """
